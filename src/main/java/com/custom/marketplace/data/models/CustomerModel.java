@@ -1,4 +1,4 @@
-package com.custom.marketplace.dto;
+package com.custom.marketplace.data.models;
 
 
 import lombok.Builder;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class CustomerDto {
+public class CustomerModel {
   private String name;
   private String phone;
   private String address;

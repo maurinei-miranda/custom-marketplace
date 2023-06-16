@@ -2,6 +2,10 @@ version: "3.8"
 name: My custom masketplace project
 services:
   database:
+    container_name: POSTGRES_DB
     image: postgres
     environment:
+      POSTGRES_DB: mydatabase
       POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
