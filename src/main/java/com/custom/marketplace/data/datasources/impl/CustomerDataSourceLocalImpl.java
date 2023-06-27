@@ -3,11 +3,13 @@ package com.custom.marketplace.data.datasources.impl;
 import com.custom.marketplace.data.datasources.CustomerDataSourceLocal;
 import com.custom.marketplace.data.datasources.JpaCustomerRepository;
 import com.custom.marketplace.domain.entities.Customer;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
+@Component
+@Profile("default")
 public class CustomerDataSourceLocalImpl implements CustomerDataSourceLocal {
   final JpaCustomerRepository jpaCustomerRepository;
 
@@ -33,7 +35,7 @@ public class CustomerDataSourceLocalImpl implements CustomerDataSourceLocal {
   }
 
   @Override
-  public List<Customer> getCustomers() {
+  public Iterable<Customer> getCustomers() {
     return jpaCustomerRepository.findAll();
   }
 }

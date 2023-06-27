@@ -6,11 +6,10 @@ import com.custom.marketplace.domain.usecases.CreateCustomer;
 import com.custom.marketplace.domain.usecases.DeleteCustomer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController(value = "/customer")
+@RestController
+@RequestMapping("/customer")
 public class CustomerController {
 
   final CreateCustomer createCustomer;
@@ -21,8 +20,13 @@ public class CustomerController {
     this.deleteCustomer = deleteCustomer;
   }
 
-  @PostMapping
-  public ResponseEntity<CustomerModel> createCustomer(CustomerModel customerModel) {
+  @GetMapping("/get")
+  public ResponseEntity<String> testEndpoint() {
+    return new ResponseEntity<>("ASD", HttpStatus.OK);
+  }
+
+  @PostMapping()
+  public ResponseEntity<CustomerModel> createCustomer(@RequestBody CustomerModel customerModel) {
     Customer custom = new Customer();
     Customer customer = createCustomer.call(custom);
     System.out.println(customer);
@@ -34,4 +38,6 @@ public class CustomerController {
     deleteCustomer.call(id);
     return new ResponseEntity<>("Customer deleted", HttpStatus.NO_CONTENT);
   }
+
+
 }

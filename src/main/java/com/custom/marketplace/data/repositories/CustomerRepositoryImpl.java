@@ -3,9 +3,9 @@ package com.custom.marketplace.data.repositories;
 import com.custom.marketplace.data.datasources.CustomerDataSourceLocal;
 import com.custom.marketplace.domain.entities.Customer;
 import com.custom.marketplace.domain.repositories.CustomerRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
-
+@Component
 public class CustomerRepositoryImpl implements CustomerRepository {
   final CustomerDataSourceLocal customerDataSourceLocal;
 
@@ -29,7 +29,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
   }
 
   @Override
-  public List<Customer> getCustomers() {
+  public Iterable<Customer> getCustomers() {
     return customerDataSourceLocal.getCustomers();
   }
 }

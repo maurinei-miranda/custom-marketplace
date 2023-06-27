@@ -3,10 +3,12 @@ package com.custom.marketplace.domain.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
 @AllArgsConstructor
 @Entity
+@Getter
 public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
