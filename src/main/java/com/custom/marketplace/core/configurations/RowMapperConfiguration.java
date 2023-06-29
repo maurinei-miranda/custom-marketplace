@@ -10,7 +10,6 @@ public class RowMapperConfiguration {
 
   @Bean
   public CustomerMapper customerRowMapper(){
-    CustomerMapper customerMapper = new CustomerMapper();
-    return customerMapper;
+    return new CustomerMapper();
   }
 }

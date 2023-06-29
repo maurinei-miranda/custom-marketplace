@@ -34,8 +34,4 @@ public class CustomerDataSourceLocalImpl implements CustomerDataSourceLocal {
     return byId.get();
   }
 
-  @Override
-  public Iterable<Customer> getCustomers() {
-    return jpaCustomerRepository.findAll();
-  }
 }

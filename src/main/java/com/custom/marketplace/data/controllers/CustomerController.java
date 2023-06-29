@@ -1,9 +1,12 @@
 package com.custom.marketplace.data.controllers;
 
+import com.custom.marketplace.data.mappers.CustomCustomerMapper;
 import com.custom.marketplace.data.models.CustomerModel;
+import com.custom.marketplace.data.models.CustomerResponse;
 import com.custom.marketplace.domain.entities.Customer;
 import com.custom.marketplace.domain.usecases.CreateCustomer;
 import com.custom.marketplace.domain.usecases.DeleteCustomer;
+import com.custom.marketplace.domain.usecases.GetCustomer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,30 +17,34 @@ public class CustomerController {
 
   final CreateCustomer createCustomer;
   final DeleteCustomer deleteCustomer;
+  final GetCustomer getCustomer;
+  final CustomCustomerMapper customCustomerMapper;
 
-  public CustomerController(CreateCustomer createCustomer, DeleteCustomer deleteCustomer) {
+  public CustomerController(CreateCustomer createCustomer, DeleteCustomer deleteCustomer, GetCustomer getCustomer, CustomCustomerMapper customCustomerMapper) {
     this.createCustomer = createCustomer;
     this.deleteCustomer = deleteCustomer;
+    this.getCustomer = getCustomer;
+    this.customCustomerMapper = customCustomerMapper;
   }
 
-  @GetMapping("/get")
-  public ResponseEntity<String> testEndpoint() {
-    return new ResponseEntity<>("ASD", HttpStatus.OK);
+  @GetMapping("/{id}")
+  public ResponseEntity<CustomerResponse> getCustomer(@PathVariable Long id) {
+    Customer domain = getCustomer.call(id);
+    CustomerResponse customerResponse = customCustomerMapper.domainToResponse(domain);
+    return new ResponseEntity<>(customerResponse, HttpStatus.OK);
   }
 
   @PostMapping()
-  public ResponseEntity<CustomerModel> createCustomer(@RequestBody CustomerModel customerModel) {
-    Customer custom = new Customer();
-    Customer customer = createCustomer.call(custom);
-    System.out.println(customer);
-    return new ResponseEntity<>(customerModel, HttpStatus.CREATED);
+  public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerModel customerModel) {
+    Customer customerDomain = customCustomerMapper.modelToDomain(customerModel);
+    Customer customer = createCustomer.call(customerDomain);
+    CustomerResponse customerResponse = customCustomerMapper.domainToResponse(customer);
+    return new ResponseEntity<>(customerResponse, HttpStatus.CREATED);
   }
 
-  @DeleteMapping
-  public ResponseEntity<String> deleteCustomer(Long id) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
     deleteCustomer.call(id);
-    return new ResponseEntity<>("Customer deleted", HttpStatus.NO_CONTENT);
+    return new ResponseEntity<>("Customer deleted", HttpStatus.OK);
   }
-
-
 }
