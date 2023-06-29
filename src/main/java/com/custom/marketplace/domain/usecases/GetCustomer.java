@@ -8,13 +8,11 @@ import org.springframework.stereotype.Service;
 public class GetCustomer {
   final CustomerRepository customerRepository;
 
-
   public GetCustomer(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
   }
 
-  public Customer call(Long id){
-    Customer customer = customerRepository.getCustomer(id);
-    return customer;
+  public Customer call(Long id) {
+    return customerRepository.getCustomer(id);
   }
 }

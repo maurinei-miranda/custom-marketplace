@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class CreateCustomer {
   private final CustomerRepository customerRepository;
 
-  public CreateCustomer(CustomerRepository customerRepository){
+  public CreateCustomer(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
   }
 
