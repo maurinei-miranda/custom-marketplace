@@ -28,8 +28,4 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     return customerDataSourceLocal.getCustomer(id);
   }
 
-  @Override
-  public Iterable<Customer> getCustomers() {
-    return customerDataSourceLocal.getCustomers();
-  }
 }

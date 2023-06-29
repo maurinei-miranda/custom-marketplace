@@ -31,7 +31,7 @@ public class CustomerDataSourceLocalImpl implements CustomerDataSourceLocal {
   @Override
   public Customer getCustomer(Long id) {
     Optional<Customer> byId = jpaCustomerRepository.findById(id);
-    return byId.get();
+    return byId.orElse(null);
   }
 
 }
