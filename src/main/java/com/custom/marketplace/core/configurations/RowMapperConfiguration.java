@@ -1,7 +1,7 @@
 package com.custom.marketplace.core.configurations;
 
 
-import com.custom.marketplace.data.mappers.impl.CustomerMapper;
+import com.custom.marketplace.data.mappers.impl.CustomerMapperImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class RowMapperConfiguration {
 
   @Bean
-  public CustomerMapper customerRowMapper(){
-    return new CustomerMapper();
+  public CustomerMapperImpl customerRowMapper(){
+    return new CustomerMapperImpl();
   }
 }

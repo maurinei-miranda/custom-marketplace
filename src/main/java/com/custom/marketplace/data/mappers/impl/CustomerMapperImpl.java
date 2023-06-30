@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerMapper implements RowMapper<Customer>, CustomCustomerMapper {
+public class CustomerMapperImpl implements RowMapper<Customer>, CustomCustomerMapper {
 
   @Override
   public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
